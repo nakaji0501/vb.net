@@ -1,0 +1,61 @@
+〇新しいEXCELブックを開く
+'Excelを起動する
+Dim excelApp As New Excel.Application()
+Dim excelBooks As Excel.Workbooks = excelApp.Workbooks
+Dim excelBook As Excel.Workbook = excelBooks.Add()
+'excelを見えるように表示する
+excelApp.Visible = True
+
+〇既存のEXCELブックを開く
+Dim excelApp As New Excel.Application()
+Dim excelBooks As Excel.Workbooks
+excelBooks = excelApp.Workbooks
+excelBooks.Open("D:\hironimo.xlsx")
+excelApp.Visible = True
+ 
+〇Excelの指定したセルに値を入力する
+'Excelを起動する
+Dim sheet As Excel.Worksheet = excelApp.Worksheets("sheet1")
+sheet.Cells(1, 1) = "Hello World"
+sheet.Cells(2, 1) = "ようこそ"
+sheet.Cells(2, 2) = "ひろにもブログへ"
+
+〇Excelを保存する
+excelBook.SaveAs("D:\NewExcelBook.xlsx")
+
+〇Excel任意のセルのデータ取得
+Dim excelApp As New Excel.Application()
+Dim excelBooks As Excel.Workbooks
+excelBooks = excelApp.Workbooks
+Dim excelBook As Excel.Workbook = excelBooks.Open("D:\NewExcelBook.xlsx")
+Dim sheet As Excel.Worksheet = excelApp.Worksheets("sheet1")
+excelApp.Visible = True
+
+Dim msg As String = sheet.Cells(1, 1).value
+MessageBox.Show(msg)
+
+〇Excelを閉じる
+excelApp.Quit()
+Excelを閉じるだけでなくオブジェクトの開放もしましょう。
+
+Call System.Runtime.InteropServices.Marshal.ReleaseComObject(sheet)
+Call System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook)
+Call System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp)
+
+〇まとめ：新規のEXCELブックを作成し、任意の値を入力、保存して閉じる
+'Excelを起動する
+Dim excelApp As New Excel.Application()
+Dim excelBooks As Excel.Workbooks = excelApp.Workbooks
+Dim excelBook As Excel.Workbook = excelBooks.Add()
+excelApp.Visible = True
+Dim sheet As Excel.Worksheet = excelApp.Worksheets("sheet1")
+sheet.Cells(1, 1) = "Hello World"
+sheet.Cells(2, 1) = "ようこそ"
+sheet.Cells(2, 2) = "ひろにもブログへ"
+excelBook.SaveAs("D:\NewExcelBook2.xlsx")
+
+excelApp.Quit()
+
+Call System.Runtime.InteropServices.Marshal.ReleaseComObject(sheet)
+Call System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook)
+Call System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp)
