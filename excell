@@ -1,3 +1,7 @@
+〇Microsoft Officeのインポート
+'Office製品を使えるようにする
+Imports Microsoft.Office.Interop
+
 〇新しいEXCELブックを開く
 'Excelを起動する
 Dim excelApp As New Excel.Application()
@@ -18,7 +22,7 @@ excelApp.Visible = True
 Dim sheet As Excel.Worksheet = excelApp.Worksheets("sheet1")
 sheet.Cells(1, 1) = "Hello World"
 sheet.Cells(2, 1) = "ようこそ"
-sheet.Cells(2, 2) = "ひろにもブログへ"
+sheet.Cells(2, 2) = "練習だよ"
 
 〇Excelを保存する
 excelBook.SaveAs("D:\NewExcelBook.xlsx")
@@ -37,12 +41,12 @@ MessageBox.Show(msg)
 〇Excelを閉じる
 excelApp.Quit()
 Excelを閉じるだけでなくオブジェクトの開放もしましょう。
-
+'ExcelのプロセスがPCに残ってしまうのを防ぐ
 Call System.Runtime.InteropServices.Marshal.ReleaseComObject(sheet)
 Call System.Runtime.InteropServices.Marshal.ReleaseComObject(excelBook)
 Call System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp)
 
-〇まとめ：新規のEXCELブックを作成し、任意の値を入力、保存して閉じる
+【まとめ：新規のEXCELブックを作成し、任意の値を入力、保存して閉じる】
 'Excelを起動する
 Dim excelApp As New Excel.Application()
 Dim excelBooks As Excel.Workbooks = excelApp.Workbooks
@@ -51,7 +55,7 @@ excelApp.Visible = True
 Dim sheet As Excel.Worksheet = excelApp.Worksheets("sheet1")
 sheet.Cells(1, 1) = "Hello World"
 sheet.Cells(2, 1) = "ようこそ"
-sheet.Cells(2, 2) = "ひろにもブログへ"
+sheet.Cells(2, 2) = "練習だよ"
 excelBook.SaveAs("D:\NewExcelBook2.xlsx")
 
 excelApp.Quit()
