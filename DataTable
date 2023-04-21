@@ -1,0 +1,64 @@
+〇データテーブルを作成し、２次元配列に変換
+Public Class frmDtArray
+    Private Sub frmDtArray_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'データテーブル作成
+        Dim dt As New DataTable
+        dt.Columns.Add("sportId")
+        dt.Columns.Add("sportNm")
+        Dim dtrow As DataRow
+
+        dtrow = dt.NewRow
+        dtrow("sportId") = "0001"
+        dtrow("sportNm") = "野球"
+        dt.Rows.Add(dtrow)
+
+        dtrow = dt.NewRow
+        dtrow("sportId") = "0002"
+        dtrow("sportNm") = "サッカー"
+        dt.Rows.Add(dtrow)
+
+        dtrow = dt.NewRow
+        dtrow("sportId") = "0003"
+        dtrow("sportNm") = "バスケット"
+        dt.Rows.Add(dtrow)
+
+        Dim array1(dt.Rows.Count, 1) As String
+        dtToArray(dt, array1)
+
+        For i As Integer = 0 To array1.GetLength(0) - 1
+
+            '列の数(横)
+            'GetLength(1)で列の数が取得できる
+            '配列は0から始まるので -1 をする
+            For k As Integer = 0 To array1.GetLength(1) - 1
+                Console.Write(array1(i, k) & " ")
+            Next
+
+            Console.WriteLine()
+
+        Next
+
+    End Sub
+
+    ''' <summary>
+    ''' datatableを2次元配列へ変換
+    ''' </summary>
+    ''' <param name="dt">データテーブル</param>
+    ''' <param name="array">2次元配列</param>
+    ''' <remarks>データテーブルを2次元配列に変換する</remarks>
+    Public Sub dtToArray(ByVal dt As DataTable, ByRef array(,) As Object)
+        Try
+
+            For y As Integer = 0 To dt.Rows.Count - 1
+                For x As Integer = 0 To dt.Columns.Count - 1
+                    array(y, x) = dt.Rows(y)(x)
+                Next
+            Next
+
+        Catch ex As Exception
+            Throw
+        End Try
+
+    End Sub
+End Class
